@@ -7,7 +7,11 @@ import java.util.Scanner;
 public class DeliveryApp {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static List<Parcel> allParcels = new ArrayList<>();
+    private static final List<Parcel> allParcels = new ArrayList<>();
+    private static final List<Trackable> allTrackable = new ArrayList<>();
+    private static final ParcelBox<StandardParcel> standardBox = new ParcelBox<>(4);
+    private static final ParcelBox<FragileParcel> fragileBox = new ParcelBox<>(4);
+    private static final ParcelBox<PerishableParcel> perishableBox = new ParcelBox<>(4);
 
     public static void main(String[] args) {
         boolean running = true;
@@ -26,6 +30,12 @@ public class DeliveryApp {
                 case 3:
                     calculateCosts();
                     break;
+                case 4:
+                    reportStatus();
+                    break;
+                case 5:
+                    showBox();
+                    break;
                 case 0:
                     running = false;
                     break;
@@ -35,11 +45,40 @@ public class DeliveryApp {
         }
     }
 
+    private static void showBox() {
+        System.out.println("Введите номер типа коробки");
+        System.out.println("1 — Стандартная");
+        System.out.println("2 — Хрупкая");
+        System.out.println("3 — Скоропортящаяся");
+
+        int type = Integer.parseInt(scanner.nextLine());
+
+        switch (type) {
+            case 1:
+                printBox(standardBox.getAllParcels());
+                break;
+            case 2:
+                printBox(fragileBox.getAllParcels());
+                break;
+            case 3:
+                printBox(perishableBox.getAllParcels());
+                break;
+        }
+    }
+
+    private static void printBox(List<? extends Parcel> parcelList) {
+        for (Parcel parcel : parcelList) {
+            System.out.println(parcel.getDescription());
+        }
+    }
+
     private static void showMenu() {
         System.out.println("Выберите действие:");
         System.out.println("1 — Добавить посылку");
         System.out.println("2 — Отправить все посылки");
         System.out.println("3 — Посчитать стоимость доставки");
+        System.out.println("4 — Отследить все посылки");
+        System.out.println("5 — Показать содержимое коробки");
         System.out.println("0 — Завершить");
     }
 
@@ -52,13 +91,23 @@ public class DeliveryApp {
 
             switch (choice) {
                 case 1:
-                    allParcels.add(createParcel(1));
+                    if (createParcel(1) instanceof StandardParcel parcel) {
+                        allParcels.add(parcel);
+                        standardBox.addParcel(parcel);
+                    }
                     break;
                 case 2:
-                    allParcels.add(createParcel(2));
+                    if (createParcel(2) instanceof FragileParcel parcel) {
+                        allParcels.add(parcel);
+                        allTrackable.add(parcel);
+                        fragileBox.addParcel(parcel);
+                    }
                     break;
                 case 3:
-                    allParcels.add(createParcel(3));
+                    if (createParcel(3) instanceof PerishableParcel parcel) {
+                        allParcels.add(parcel);
+                        perishableBox.addParcel(parcel);
+                    }
                     break;
                 default:
                     running = true;
@@ -93,6 +142,13 @@ public class DeliveryApp {
             case 3 -> new PerishableParcel(description, weight, deliveryAddress, sendDay, ttl);
             default -> null;
         };
+    }
+
+    private static void reportStatus() {
+        for (Trackable trackable : allTrackable) {
+            System.out.print("Введите новый адрес: ");
+            trackable.reportStatus(scanner.nextLine());
+        }
     }
 
     private static void showType() {

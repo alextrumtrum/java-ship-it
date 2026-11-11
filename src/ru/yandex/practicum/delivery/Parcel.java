@@ -7,7 +7,6 @@ public abstract class Parcel {
     private final String deliveryAddress;
     private final int sendDay;
 
-
     public Parcel(String description, int weight, String deliveryAddress, int sendDay) {
         this.description = description;
         this.weight = weight;
@@ -35,5 +34,9 @@ public abstract class Parcel {
 
     public int getSendDay() {
         return sendDay;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }
