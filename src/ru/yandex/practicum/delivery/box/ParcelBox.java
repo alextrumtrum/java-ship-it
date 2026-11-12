@@ -1,7 +1,8 @@
-package ru.yandex.practicum.delivery;
+package ru.yandex.practicum.delivery.box;
 
 import java.util.ArrayList;
 import java.util.List;
+import ru.yandex.practicum.delivery.parcel.Parcel;
 
 public class ParcelBox<T extends Parcel> {
 

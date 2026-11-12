@@ -1,4 +1,4 @@
-package ru.yandex.practicum.delivery;
+package ru.yandex.practicum.delivery.parcel;
 
 public abstract class Parcel {
 
@@ -22,8 +22,6 @@ public abstract class Parcel {
         System.out.printf("Посылка <<%s>> доставлена по адресу %s\n", description, deliveryAddress);
     }
 
-    protected abstract int getBaseCost();
-
     public int calculateDeliveryCost() {
         return weight * getBaseCost();
     }
@@ -39,4 +37,6 @@ public abstract class Parcel {
     public int getWeight() {
         return weight;
     }
+
+    protected abstract int getBaseCost();
 }

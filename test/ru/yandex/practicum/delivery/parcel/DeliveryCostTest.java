@@ -1,11 +1,8 @@
-package ru.yandex.practicum;
+package ru.yandex.practicum.delivery.parcel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.delivery.FragileParcel;
-import ru.yandex.practicum.delivery.PerishableParcel;
-import ru.yandex.practicum.delivery.StandardParcel;
 
 public class DeliveryCostTest {
 

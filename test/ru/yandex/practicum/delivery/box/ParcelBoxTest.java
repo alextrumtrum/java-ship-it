@@ -1,11 +1,10 @@
-package ru.yandex.practicum;
+package ru.yandex.practicum.delivery.box;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.delivery.ParcelBox;
-import ru.yandex.practicum.delivery.StandardParcel;
+import ru.yandex.practicum.delivery.parcel.StandardParcel;
 
 public class ParcelBoxTest {
 

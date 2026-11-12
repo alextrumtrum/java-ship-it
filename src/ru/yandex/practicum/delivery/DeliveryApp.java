@@ -3,6 +3,12 @@ package ru.yandex.practicum.delivery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import ru.yandex.practicum.delivery.box.ParcelBox;
+import ru.yandex.practicum.delivery.parcel.FragileParcel;
+import ru.yandex.practicum.delivery.parcel.Parcel;
+import ru.yandex.practicum.delivery.parcel.PerishableParcel;
+import ru.yandex.practicum.delivery.parcel.StandardParcel;
+import ru.yandex.practicum.delivery.tracking.Trackable;
 
 public class DeliveryApp {
 
